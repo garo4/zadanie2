@@ -33,67 +33,46 @@ namespace zadanie2
         }
         private static string ExctraxtIni(string Name)
         {
-
-            if (String.IsNullOrEmpty(Name))
-            {
-                Console.WriteLine("Входная строка пуста");
-                return String.Empty;
-            }
-
-            Console.WriteLine("Изначальная длинна строки = " + Name.Length);
-
-
+            //удаляем начальные и конечные пробелы в строке, а также все точки
             Name = Name.Trim().Replace(".", String.Empty);
-            Console.WriteLine("Длинна строки после удаления пробелов и точек = " + Name.Length);
 
-
-
+           //Возварщаем пустую строку если строка состояла из пробелов и точек
             if (String.IsNullOrEmpty(Name))
-            {
-                Console.WriteLine("Входная строка пуста");
+            {               
                 return String.Empty;
             }
 
-
+            //Получаем индекс первого пробела
             int index = Name.IndexOf(' ');
 
-
+            //Если Пробел не найден Возвращаем только Фамилию
             if (index < 0)
             {
-                Console.WriteLine("Строка имеет только Фамилию - " + Name.Substring(0, 1).ToUpper() + Name.Substring(1).ToLower());
                 return Name.Substring(0, 1).ToUpper() + Name.Substring(1).ToLower();
             }
 
-
+            // получаем фамилию
             string lastName = Name.Substring(0, index).Trim();
             lastName = lastName.Substring(0, 1).ToUpper() + lastName.Substring(1).ToLower();
 
-            Console.WriteLine("Фамилия - " + lastName);
-
-
+            //Удаляем фамилию из нашей строки
             Name = Name.Substring(index).Trim();
 
-
+            //Получаем индекс первого пробела для имени
             index = Name.IndexOf(' ');
 
-
+            //Если Пробел не найден Возвращаем  Фамилию и первый инициал
             if (index < 0)
-            {
-                Console.WriteLine("Строка имеет только Фамилию и первый инициал - " + lastName + " " + Name.Substring(0, 1).ToUpper() + ".");
+            {            
                 return lastName + " " + Name.Substring(0, 1).ToUpper() + ".";
             }
 
-
+            // получаем фамилию
             string firstName = Name.Substring(0, index).Trim();
             firstName = firstName.Substring(0, 1).ToUpper() + firstName.Substring(1).ToLower();
 
-            Console.WriteLine("Имя - " + firstName);
-
-
+            //Получаем оставшееся отчество
             string fatherName = Name.Substring(index).Trim().Substring(0, 1).ToUpper() + Name.Substring(index).Trim().Substring(1).ToLower();
-
-            Console.WriteLine("Отчество - " + fatherName);
-
             return lastName + " " + firstName.Substring(0, 1) + ". " + fatherName.Substring(0, 1) + ".";
 
         }
